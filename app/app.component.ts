@@ -24,8 +24,9 @@ const elasticOut = (t) =>
 @Component({
     selector: "ns-app",
     template: `
-        <StackLayout class="wrapper" (tap)="onTap(lbl)">
-            <Label #lbl class="thelabel" text="Hello"></Label>
+        <StackLayout class="wrapper" (tap)="onTap($event)">
+            <Label class="thelabel1" text="Hello" [height]="blah$ | async"></Label>
+            <Label class="thelabel2" text="Hello" [height]="blah$ | async"></Label>
         </StackLayout>
     `,
     styles: [
@@ -33,8 +34,12 @@ const elasticOut = (t) =>
             .wrapper {
                 text-align: center;
             }
-            .thelabel {
+            .thelabel1 {
                 background-color: red;
+                color: white;
+            }
+            .thelabel2 {
+                background-color: green;
                 color: white;
             }
         `
@@ -42,15 +47,10 @@ const elasticOut = (t) =>
 })
 
 export class AppComponent {
-    onTap(lbl: Label) {
-        duration(2000)
+    blah$: Observable<number> = Observable.of(25);
+    onTap() {
+        this.blah$ = duration(2000)
             .map(elasticOut)
-            .map(amount(250))
-            .subscribe(curFrame => {
-                lbl.style.height = curFrame;
-            },
-            er => console.error(er),
-            () => console.log('booya!')
-            );
+            .map(amount(150));
     }
 }
