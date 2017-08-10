@@ -1,0 +1,7 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page">
+
+        <StackLayout class="wrapper" tap="{{ onTap }}">
+            <Label class="thelabel1" text="Hello" height="{{ blah }}"></Label>
+        </StackLayout>
+
+</Page>
